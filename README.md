@@ -76,7 +76,9 @@ Opérations disponibles :
 2. Soustraction (-)
 3. Multiplication (*)
 4. Division (/)
-5. Quitter
+5. Modulo (%)
+6. Puissance (**)
+7. Quitter
 Votre choix (1-5) : 1
 Entrez le premier nombre : 10
 Entrez le deuxième nombre : 5
