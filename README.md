@@ -23,6 +23,9 @@ La calculatrice doit :
    - Soustraction (-)
    - Multiplication (\*)
    - Division (/)
+   - Modulo (%)
+   - Puissance (\*\*)
+   - Quitter
 
 2. **Gestion des exceptions** :
    - Si l'utilisateur entre un choix d'opération invalide, afficher un message d'erreur
