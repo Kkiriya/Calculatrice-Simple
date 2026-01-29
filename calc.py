@@ -2,8 +2,9 @@
 # Date: 2026-01-29
 # But: Créer une calculatrice simple en Python avec une gestion robuste des erreurs à l'aide des exceptions.
 import sys
+import operator
 
-def choisir_nbr():
+def choisir_nbr(op_w_err=()):
     while True:
         nbr1 = input("Nombre 1: ")
         try:
@@ -16,11 +17,26 @@ def choisir_nbr():
         nbr2 = input("Nombre 2: ")
         try:
             nbr2 = float(nbr2)
-            break
+            if nbr2 == 0:
+                print(f"Erreur: division/modulo par zero impossible!")
+                continue
+            else:
+                break
         except(ValueError):
             print(f"Erreur: {nbr2} n'est pas un nombre!")
 
     return nbr1, nbr2
+
+def operation(op,a, b):
+    operators = {
+        "+": operator.add,
+        "-": operator.sub,
+        "*": operator.mul,
+        "/": operator.truediv,
+        "%": operator.mod,
+        "**": operator.pow
+    }
+    return operators[op](a,b)
 
 def exit_calc():
     while True:
@@ -39,6 +55,16 @@ def calculatrice():
     """
     Fonction principale de la calculatrice
     """
+    operations_supporter = {
+        "1": "+",
+        "2": "-",
+        "3": "*",
+        "4": "/",
+        "5": "%",
+        "6": "**"
+    }
+
+
     print("=== CALCULATRICE SIMPLE ===")
 
     while True:
@@ -52,68 +78,13 @@ def calculatrice():
         print("6. Puissance (**)")
         print("7. Quitter")
 
-        str_choix = input("Votre choix (1-5): ")
-        str_choix_valide = "12345"
+        choix = input("Votre choix (1-5): ")
+        op_w_err = ("4", "5")
 
-        match(str_choix):
-            case "1":
-                nbr1, nbr2 = choisir_nbr()
-                resultat = nbr1 + nbr2
-                print(f"{nbr1} + {nbr2} = {resultat}")
+        if choix in choix_operations:
+            nbr1, nbr2 = choisir_nbr(choix, op_w_err)
+            print("")
 
-                exit_calc()
-
-            case "2":
-                nbr1, nbr2 = choisir_nbr()
-                resultat = nbr1 - nbr2
-                print(f"{nbr1} - {nbr2} = {resultat}")
-
-                exit_calc()
-
-            case "3":
-                nbr1, nbr2 = choisir_nbr()
-                resultat = nbr1 * nbr2
-                print(f"{nbr1} * {nbr2} = {resultat}")
-
-                exit_calc()
-
-            case "4":
-                while True:
-                    nbr1, nbr2 = choisir_nbr()
-                    if nbr2 == 0:
-                        print("Erreur: division par zero impossible")
-                    else:
-                        break
-
-                resultat = nbr1 / nbr2
-                print(f"{nbr1} / {nbr2} = {resultat}")
-
-                exit_calc()
-
-            case "5":
-                while True:
-                    nbr1, nbr2 = choisir_nbr()
-                    if nbr2 == 0:
-                        print("Erreur: modulo par zero impossible")
-                    else:
-                        break
-
-                resultat = nbr1 % nbr2
-                print(f"{nbr1} % {nbr2} = {resultat}")
-
-                exit_calc()
-
-            case "6":
-                nbr1, nbr2 = choisir_nbr()
-                resultat = nbr1 ** nbr2
-                print(f"{nbr1} ** {nbr2} = {resultat}")
-
-
-            case "7" | "q" | "Q":
-                break
-
-            case _:
-                print(f"Erreur: {str_choix} n'est pas une option valide!")
 
 
 
