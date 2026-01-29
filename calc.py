@@ -48,7 +48,9 @@ def calculatrice():
         print("2. Soustraction (-)")
         print("3. Multiplication (*)")
         print("4. Division (/)")
-        print("5. Quitter")
+        print("5. Modulo (%)")
+        print("6. Puissance (**)")
+        print("7. Quitter")
 
         str_choix = input("Votre choix (1-5): ")
         str_choix_valide = "12345"
@@ -88,7 +90,26 @@ def calculatrice():
 
                 exit_calc()
 
-            case "5" | "q" | "Q":
+            case "5":
+                while True:
+                    nbr1, nbr2 = choisir_nbr()
+                    if nbr2 == 0:
+                        print("Erreur: modulo par zero impossible")
+                    else:
+                        break
+
+                resultat = nbr1 % nbr2
+                print(f"{nbr1} % {nbr2} = {resultat}")
+
+                exit_calc()
+
+            case "6":
+                nbr1, nbr2 = choisir_nbr()
+                resultat = nbr1 ** nbr2
+                print(f"{nbr1} ** {nbr2} = {resultat}")
+
+
+            case "7" | "q" | "Q":
                 break
 
             case _:
