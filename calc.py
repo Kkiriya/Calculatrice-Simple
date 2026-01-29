@@ -52,68 +52,67 @@ def calculatrice():
         print("6. Puissance (**)")
         print("7. Quitter")
 
-        str_choix = input("Votre choix (1-5): ")
-        str_choix_valide = "12345"
+        try:
+            choix = input("Quel est votre choix (1-6): ")
 
-        match(str_choix):
-            case "1":
-                nbr1, nbr2 = choisir_nbr()
-                resultat = nbr1 + nbr2
-                print(f"{nbr1} + {nbr2} = {resultat}")
+            if choix == '7':
+                break;
 
-                exit_calc()
+            if choix not in ['1', '2', '3', '4', '5', '6']:
+                raise ValueError("Choix invalide. Veuillez entrer un nombre entre 1 et 5")
 
-            case "2":
-                nbr1, nbr2 = choisir_nbr()
-                resultat = nbr1 - nbr2
-                print(f"{nbr1} - {nbr2} = {resultat}")
+            try:
+                num1 = float(input("Entrez le premier nombre: "))
+                num2 = float(input("Entrez le deuxieme nombre: "))
 
-                exit_calc()
+            except ValueError:
+                raise ValueError("Veuillez entrez un nombre valide.")
 
-            case "3":
-                nbr1, nbr2 = choisir_nbr()
-                resultat = nbr1 * nbr2
-                print(f"{nbr1} * {nbr2} = {resultat}")
+            match(choix):
+                case "1":
+                    resultat = num1 + num2
+                    ope = "+"
 
-                exit_calc()
+                case "2":
+                    resultat = num1 - num2
+                    ope = "-"
 
-            case "4":
-                while True:
-                    nbr1, nbr2 = choisir_nbr()
-                    if nbr2 == 0:
-                        print("Erreur: division par zero impossible")
-                    else:
-                        break
+                case "3":
+                    resultat = num1 * num2
+                    ope = "*"
 
-                resultat = nbr1 / nbr2
-                print(f"{nbr1} / {nbr2} = {resultat}")
+                case "4":
+                    if num2 == '0':
+                        raise ZeroDivisionError("Division par zero impossible!")
 
-                exit_calc()
+                    resultat = num1 / num2
+                    ope = "/"
 
-            case "5":
-                while True:
-                    nbr1, nbr2 = choisir_nbr()
-                    if nbr2 == 0:
-                        print("Erreur: modulo par zero impossible")
-                    else:
-                        break
+                case "5":
+                    if num2 == '0':
+                        raise ZeroDivisionError("Modulo par zero impossible!")
+                    resultat = num1 % num2
+                    ope = "%"
 
-                resultat = nbr1 % nbr2
-                print(f"{nbr1} % {nbr2} = {resultat}")
+                case "6":
+                    resultat = num1 ** num2
+                    ope = "**"
 
-                exit_calc()
-
-            case "6":
-                nbr1, nbr2 = choisir_nbr()
-                resultat = nbr1 ** nbr2
-                print(f"{nbr1} ** {nbr2} = {resultat}")
+            print(f"{num1} {ope} {num2} = {resultat}")
+            exit_calc()
 
 
-            case "7" | "q" | "Q":
-                break
+        except ValueError as ve:
+            print(f"Erreur: {ve}")
 
-            case _:
-                print(f"Erreur: {str_choix} n'est pas une option valide!")
+        except ZeroDivisionError as zde:
+            print(f"Erreur: {zde}")
+
+        except Exception as e:
+            print(f"Erreur inattendue: {e}")
+
+
+
 
 
 
